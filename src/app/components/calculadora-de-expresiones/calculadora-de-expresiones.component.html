@@ -1,0 +1,22 @@
+<form [formGroup]="form" (ngSubmit)="calcular()">
+    <div class="form-row mb-2">
+        <mat-form-field appearance="legacy" style="width: 100%;">
+            <mat-label>Expresión matemática</mat-label>
+            <input matInput placeholder="Expresión matemática" formControlName="expression" autocomplete="off">
+            <mat-error *ngIf="form.controls['expression'].errors">La expresión es obligatoria</mat-error>
+        </mat-form-field>
+    </div>
+    <div class="form-row mb-2">
+        <mat-form-field appearance="legacy" style="width: 100%;">
+            <mat-label>Precisión deseada</mat-label>
+            <mat-select formControlName="precision">
+                <mat-option *ngFor="let precision of listaPrecisiones" [value]="precision">
+                    {{precision}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <button mat-raised-button [ngClass]="{'spinner': cargando}" [disabled]="cargando" color="primary" class="mt-3"
+        style="width: 100%;">Calcular</button>
+</form>
